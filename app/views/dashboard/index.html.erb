@@ -6,15 +6,23 @@
   "
 
   tileClassName = "
-    shadow-sm hover:shadow-2xl rounded bg-white
+    shadow-sm hover:shadow-2xl rounded bg-black
     justify-self-center w-24 max-w-36 aspect-square
   "
 %>
 
-<div id="board" class="<%= boardClassName %>">
+<div
+  id="board"
+  class="<%= boardClassName %>"
+  data-controller="board"
+>
   <% (@board_size * @board_size).times do |index| %>
-    <div id="tile_<%= index %>" class="<%= tileClassName %>">
-      <%= index %>
+    <div
+      id="tile_<%= index %>"
+      class="<%= tileClassName %>"
+      data-action="click->board#flip"
+      data-tile-index="<%= index %>"
+    >
     </div>
   <% end %>
 </div>
