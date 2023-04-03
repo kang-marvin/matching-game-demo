@@ -2,13 +2,21 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="board"
 export default class extends Controller {
+
+  /** Name should match the controller name */
+  static outlets = [ "store" ]
+
   connect() {
     // console.log('Board controller connected')
   }
 
   flip(event) {
+    /** For testing only. Remove when done */
+    this.storeOutlet.test()
+
     const tile = event.target
     const tileIndex = Number(tile.dataset.tileIndex)
+    const tileIsOpen = String(tile.dataset.tileIsOpen)
 
     if (tileIsOpen === "false") {
       this.#showContent(tile, tileIndex)

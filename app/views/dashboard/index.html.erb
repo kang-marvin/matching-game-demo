@@ -11,10 +11,13 @@
   "
 %>
 
+<div id="store--elements" data-controller="store"></div>
+
 <div
   id="board"
   class="<%= boardClassName %>"
   data-controller="board"
+  data-board-store-outlet="div#store--elements"
 >
   <% (@board_size * @board_size).times do |index| %>
     <div
@@ -22,6 +25,7 @@
       class="<%= tileClassName %>"
       data-action="click->board#flip"
       data-tile-index="<%= index %>"
+      data-tile-is-open="false"
     >
     </div>
   <% end %>
