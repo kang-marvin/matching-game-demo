@@ -20,3 +20,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - \
   && npm install -g esbuild
 
 EXPOSE 3000
+
+COPY . /matching-game/
+
+RUN yarn install --check-files
+
+RUN bin/setup
