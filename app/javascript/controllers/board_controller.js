@@ -6,23 +6,23 @@ export default class extends Controller {
   /** Name should match the controller name */
   static outlets = [ "store" ]
 
-  connect() {
-    // console.log('Board controller connected')
-  }
-
   flip(event) {
-    /** For testing only. Remove when done */
-    this.storeOutlet.test()
-
     const tile = event.target
     const tileIndex = Number(tile.dataset.tileIndex)
     const tileIsOpen = String(tile.dataset.tileIsOpen)
 
     if (tileIsOpen === "false") {
       this.#showContent(tile, tileIndex)
-      setTimeout(() => {
-        this.#hideContent(tile)
-      }, 1000)
+      this.storeOutlet.addToSuccessiveTilesCollection(tile)
+
+      if (this.storeOutlet.successiveTilesCollectionCount === 2) {
+        setTimeout(() => {
+          this.storeOutlet.successiveTilesCollection.forEach(tile => {
+            this.#hideContent(tile)
+          })
+          this.storeOutlet.resetSuccessiveTilesCollection()
+        }, 1000)
+      }
     }
   }
 

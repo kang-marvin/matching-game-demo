@@ -3,10 +3,18 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="store"
 export default class extends Controller {
   connect() {
+    this.successiveTilesCollection = []
   }
 
-  /** For testing only. Remove when done */
-  test() {
-    console.log("A tile has been clicked")
+  addToSuccessiveTilesCollection(tile){
+    this.successiveTilesCollection.push(tile)
+  }
+
+  resetSuccessiveTilesCollection() {
+    this.successiveTilesCollection = []
+  }
+
+  get successiveTilesCollectionCount() {
+    return this.successiveTilesCollection.length
   }
 }
