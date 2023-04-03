@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ."/matching-game
+    ports:
+      - "3000:3000"
+    command: bin/dev
