@@ -10,13 +10,16 @@ export default class extends Controller {
     const tile = event.target
     const tileIndex = Number(tile.dataset.tileIndex)
 
-    this.#showContent(tile, tileIndex)
-    setTimeout(() => {
-      this.#hideContent(tile)
-    }, 1000)
+    if (tileIsOpen === "false") {
+      this.#showContent(tile, tileIndex)
+      setTimeout(() => {
+        this.#hideContent(tile)
+      }, 1000)
+    }
   }
 
   #showContent(tile, tileIndex) {
+    tile.dataset.tileIsOpen = "true"
     tile.textContent = tileIndex
     tile.style.backgroundColor = "red"
     tile.classList.remove("bg-black")
@@ -26,5 +29,6 @@ export default class extends Controller {
     tile.textContent = null
     tile.style.backgroundColor = null
     tile.classList.add("bg-black")
+    tile.dataset.tileIsOpen = "false"
   }
 }
