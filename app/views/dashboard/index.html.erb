@@ -1,0 +1,20 @@
+<%
+  boardClassName = "
+    bg-gradient-to-r from-violet-500 to-indigo-500 p-8
+    rounded aspect-square justify-center items-center
+    grid gap-6 grid-cols-#{@board_size} grid-rows-#{@board_size}
+  "
+
+  tileClassName = "
+    shadow-sm hover:shadow-2xl rounded bg-white
+    justify-self-center w-24 max-w-36 aspect-square
+  "
+%>
+
+<div id="board" class="<%= boardClassName %>">
+  <% (@board_size * @board_size).times do |index| %>
+    <div id="tile_<%= index %>" class="<%= tileClassName %>">
+      <%= index %>
+    </div>
+  <% end %>
+</div>
