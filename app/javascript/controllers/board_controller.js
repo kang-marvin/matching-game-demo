@@ -21,16 +21,25 @@ export default class extends Controller {
           tileIndex,
           this.finishedResultValue
         )
+
       this.#showContent(tile, currentTileContent)
       this.storeOutlet.addToSuccessiveTilesCollection(tile)
 
       if (this.storeOutlet.successiveTilesCollectionCount === 2) {
         setTimeout(() => {
-          this.storeOutlet.successiveTilesCollection.forEach(tile => {
-            this.#hideContent(tile)
-          })
+          if (this.storeOutlet.tile.matchingIndex !== tileIndex) {
+            this.storeOutlet.successiveTilesCollection.forEach(tile => {
+              this.#hideContent(tile)
+            });
+          }
           this.storeOutlet.resetSuccessiveTilesCollection()
+          this.storeOutlet.resetPreviousTile()
         }, 1000)
+      } else {
+        this.storeOutlet.updatePreviouslyClickedTile(
+          tileIndex,
+          currentTileContent['indexes']
+        )
       }
     }
   }
